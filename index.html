@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🤥 Lie Generator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 15px 0 7px;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 25px;
+            min-height: 110px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .copy {
+            background: #28a745;
+        }
+
+        .new {
+            background: #ff7a00;
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🤥 Lie Generator</h1>
+
+        <p class="subtitle">
+            Generate funny and ridiculous excuses!
+        </p>
+
+        <!-- Category -->
+        <label for="category">Choose a Category:</label>
+
+        <select id="category">
+
+            <option value="relationship">❤️ Relationship</option>
+            <option value="family">👨‍👩‍👧 Family</option>
+            <option value="friends">👯 Friends</option>
+            <option value="college">🎓 College / School</option>
+            <option value="work">💼 Work</option>
+            <option value="late">⏰ Being Late</option>
+            <option value="phone">📱 Phone / Messages</option>
+            <option value="money">💰 Money</option>
+            <option value="party">🎉 Party / Events</option>
+            <option value="outing">🏠 Going Out</option>
+            <option value="homework">📚 Homework / Assignment</option>
+            <option value="travel">🚌 Travel / Transport</option>
+            <option value="food">🍔 Food</option>
+            <option value="sleep">😴 Sleep</option>
+            <option value="shopping">🛒 Shopping</option>
+            <option value="housework">🧹 Housework</option>
+            <option value="forgot">📅 Forgot Something</option>
+            <option value="computer">💻 Computer / Internet</option>
+            <option value="gym">🏃 Exercise / Gym</option>
+            <option value="random">😂 Random / Anything</option>
+
+        </select>
+
+        <!-- Lie Level -->
+        <label for="level">Choose Lie Level:</label>
+
+        <select id="level">
+
+            <option value="small">🙂 Small Excuse</option>
+            <option value="creative">😏 Creative</option>
+            <option value="ridiculous">😂 Ridiculous</option>
+            <option value="crazy">🤯 Completely Unbelievable</option>
+
+        </select>
+
+        <!-- Generate Button -->
+        <button onclick="generateLie()">
+            🤥 Generate Lie
+        </button>
+
+        <!-- Result -->
+        <div class="result" id="result">
+            Your funny excuse will appear here...
+        </div>
+
+        <!-- Copy Button -->
+        <button class="copy" onclick="copyLie()">
+            📋 Copy Lie
+        </button>
+
+        <!-- New Button -->
+        <button class="new" onclick="generateLie()">
+            🔄 New Lie
+        </button>
+
+        <div class="footer">
+            Just for fun 😂 | Don't use lies to hurt anyone!
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const lies = {
+
+            relationship: [
+                "I wasn't ignoring you. I was giving your message some time to breathe.",
+                "I saw your message, but my brain was preparing the perfect reply.",
+                "I didn't forget our plan. I was just testing your memory.",
+                "My phone was working, but apparently my communication skills weren't.",
+                "I was going to reply five minutes ago... emotionally."
+            ],
+
+            family: [
+                "I was about to do it, but the perfect moment never arrived.",
+                "I didn't hear you because my brain was in silent mode.",
+                "I was doing it mentally. Does that count?",
+                "I thought someone else was going to do it.",
+                "I was waiting for divine inspiration."
+            ],
+
+            friends: [
+                "I saw your message and then accidentally entered the world of reels.",
+                "I was going to come, but my bed convinced me otherwise.",
+                "I didn't forget. I was just dramatically delayed.",
+                "My brain temporarily deleted the information.",
+                "I was ready, but my motivation wasn't."
+            ],
+
+            college: [
+                "Sir, I completed it mentally but forgot to write it.",
+                "My notebook and pen had a disagreement.",
+                "I studied everything except the topic that came in the exam.",
+                "My assignment is complete in another universe.",
+                "My brain was loading when the class started."
+            ],
+
+            work: [
+                "I was working on it when my computer decided to take a personal day.",
+                "I had the work ready, but my brain forgot to send it.",
+                "I was waiting for the right moment to start.",
+                "The task was on my list. Unfortunately, so were 47 other things.",
+                "I was extremely productive... just not on this task."
+            ],
+
+            late: [
+                "I'm not late. I'm operating on a different time zone.",
+                "My alarm clock and I had a disagreement.",
+                "I left home on time, but time apparently moved faster.",
+                "The road was fine. My sense of time wasn't.",
+                "I was only five minutes late in my imagination."
+            ],
+
+            phone: [
+                "My phone was on silent and apparently so was my brain.",
+                "I saw your message but forgot to reply.",
+                "My phone decided to protect me from notifications.",
+                "I was charging my phone and accidentally charged my patience too.",
+                "My phone was working perfectly. I wasn't."
+            ],
+
+            money: [
+                "I was going to pay you, but my wallet entered a financial crisis.",
+                "My money disappeared faster than I expected.",
+                "I have money. It's just currently somewhere else.",
+                "My bank account needs emotional support.",
+                "I was financially prepared... yesterday."
+            ],
+
+            party: [
+                "I was ready, but my social battery reached 1%.",
+                "I thought the party was tomorrow.",
+                "I was getting ready when my bed kidnapped me.",
+                "My outfit wasn't emotionally prepared.",
+                "I was invited, but my motivation wasn't."
+            ],
+
+            outing: [
+                "I was ready to go, but suddenly my bed became extremely comfortable.",
+                "I couldn't go because my imaginary plans became real.",
+                "I was waiting for the perfect weather.",
+                "I thought I had permission from myself.",
+                "I wanted to go, but my laziness won."
+            ],
+
+            homework: [
+                "My homework was finished, but my notebook refused to show it.",
+                "My pen stopped working at the most important moment.",
+                "I completed the homework mentally.",
+                "My homework disappeared mysteriously.",
+                "My brain was on vacation while I was doing the assignment."
+            ],
+
+            travel: [
+                "The bus arrived exactly when I wasn't there.",
+                "I was at the bus stop, but the bus had other plans.",
+                "My transport decided to take an unexpected adventure.",
+                "I left early, but the road had different plans.",
+                "I think Google Maps and I had different opinions."
+            ],
+
+            food: [
+                "I didn't eat your food. I was just protecting it from getting cold.",
+                "I was going to save some, but the food had other plans.",
+                "I only took one bite. It was a very large bite.",
+                "I thought it was my food. The plate looked familiar.",
+                "The food disappeared before I could stop it."
+            ],
+
+            sleep: [
+                "I wasn't sleeping. I was testing the mattress.",
+                "I closed my eyes for five minutes and accidentally entered tomorrow.",
+                "My alarm rang, but I ignored it professionally.",
+                "I needed to recharge my human battery.",
+                "I was awake emotionally."
+            ],
+
+            shopping: [
+                "I wasn't shopping. I was conducting market research.",
+                "The discount forced me to buy it.",
+                "I didn't need it yesterday, but today was different.",
+                "My wallet tried to stop me, but failed.",
+                "I only went to look. The shopping bag disagreed."
+            ],
+
+            housework: [
+                "I was about to clean when I realized it needed more planning.",
+                "The room was clean yesterday. That's what matters.",
+                "I was waiting for the dust to settle.",
+                "I cleaned one corner. That's technically progress.",
+                "My cleaning motivation went missing."
+            ],
+
+            forgot: [
+                "I remembered it perfectly... after it was too late.",
+                "My brain saved the information in the wrong folder.",
+                "I knew I had to remember something. I just forgot what it was.",
+                "The reminder reminded me too late.",
+                "My memory needed an update."
+            ],
+
+            computer: [
+                "My computer was working, but it refused to cooperate.",
+                "The internet disappeared exactly when I needed it.",
+                "My laptop decided to restart its life.",
+                "The file was there five minutes ago.",
+                "My Wi-Fi and I are currently not on speaking terms."
+            ],
+
+            gym: [
+                "I was going to exercise, but I didn't want to shock my body.",
+                "My muscles requested a rest day.",
+                "I did mental exercise today.",
+                "I walked to the gym. That's already exercise.",
+                "My motivation forgot its gym membership."
+            ]
+
+        };
+
+
+        function generateLie() {
+
+            let category =
+                document.getElementById("category").value;
+
+            let level =
+                document.getElementById("level").value;
+
+            let selectedLies;
+
+
+            // Random category
+            if (category === "random") {
+
+                let categories =
+                    Object.keys(lies);
+
+                let randomCategory =
+                    categories[
+                        Math.floor(
+                            Math.random() * categories.length
+                        )
+                    ];
+
+                selectedLies = lies[randomCategory];
+
+            } else {
+
+                selectedLies = lies[category];
+
+            }
+
+
+            // Select random lie
+            let randomIndex =
+                Math.floor(
+                    Math.random() * selectedLies.length
+                );
+
+            let lie =
+                selectedLies[randomIndex];
+
+
+            // Add level
+            if (level === "small") {
+
+                lie = "🙂 " + lie;
+
+            }
+
+            else if (level === "creative") {
+
+                lie = "😏 " + lie +
+                    " Trust me, it's complicated.";
+
+            }
+
+            else if (level === "ridiculous") {
+
+                lie = "😂 " + lie +
+                    " Even I don't know how this happened.";
+
+            }
+
+            else if (level === "crazy") {
+
+                lie = "🤯 " + lie +
+                    " A mysterious force from another dimension may be responsible.";
+
+            }
+
+
+            // Display lie
+            document.getElementById("result").innerText =
+                lie;
+        }
+
+
+        function copyLie() {
+
+            let result =
+                document.getElementById("result").innerText;
+
+
+            if (
+                result ===
+                "Your funny excuse will appear here..."
+            ) {
+
+                alert("First generate a lie! 🤥");
+
+                return;
+            }
+
+
+            navigator.clipboard.writeText(result);
+
+            alert("Lie copied! 📋🤥");
+        }
+
+    </script>
+
+</body>
+
+</html>
